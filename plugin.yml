@@ -1,5 +1,11 @@
-name: VIPs
+name: countdown
 author: CentOs
 main: Main\Main
 version: 0.1
 description: Cạn lời !!
+
+commands:
+  batdau: 
+    usage: /batdau
+    permission: batdau
+    description: Bawts

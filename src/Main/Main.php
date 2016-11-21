@@ -1,39 +1,58 @@
 <?php
 
-namespace Main;
+namespace countdown;
 
-use pocketmine\utils\TextFormat as T;
-use pocketmine\utils\Config;
-use pocketmine\command\CommandSender;
-use pocketmine\item\Item;
-use pocketmine\level\Position;
-use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Player;
+use pocketmine\scheduler\PluginTask;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
 
-class Main extends PluginBase implements Listener{
-	public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
-		if ($sender->isOp()) {
-			switch($command->getName()) {
-				case "vip":
-				case "addvip":
-					$name = $player->getName();
-					if (isset($args[0])){
-						if(is_null($this->plugin->getServer()->getPlayer($args[0]))){
-							$sender->sendMessage("That's not an player!");
-							return true;
-						} else {
-							if(!$this->plugin->isVip($args[0])){
-								array_push($this->plugin->vips, $args[0]);
-								$sender->sendMessage("The player is now VIP!");
-								return true;
-						} else {
-							$sender->sendMessage("That player is already a VIP!");
-							return true;
-						}
-					}
-				}
-			}
+class MainTask extends PluginTask {
+
+	public $seccond = 10;
+
+	public function onRun($tick) {
+		$this->seccond--;
+		if($this->seccond == 5) {
+			foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
+
+			$p->sendMessage("Còn 5 giây");
+ 		}
+	}
+
+	if($this->seccond == 4) {
+		foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
+
+		$p->sendMessage("Còn 4 giây");
 		}
 	}
+
+if($this->seccond == 3) {
+foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
+
+$p->sendMessage("Còn 3 giây");
+}
+}
+
+if($this->seccond == 2) {
+foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
+
+$p->sendMessage("Còn 2 giây");
+}
+}
+
+if($this->seccond == 1) {
+foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
+
+$p->sendMessage("Còn 1 giây");
+}
+}
+
+if($this->seccond == 0) {
+foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
+
+$this->getOwner()->getServer()->getScheduler()->cancelTask($this->getTaskId());
+}
+}
+}
 }

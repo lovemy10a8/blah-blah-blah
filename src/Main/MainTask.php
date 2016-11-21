@@ -1,6 +1,6 @@
 <?php
 
-namespace countdown;
+namespace Main;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\PluginTask;
